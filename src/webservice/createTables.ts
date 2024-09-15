@@ -30,12 +30,11 @@ export function createTablesWebservice(db_con: Connection, req: any, res: any) {
           }
         }
         if (err.code === "ER_TABLE_EXISTS_ERROR") {
-            createdTablesMessage += `</br>Table ${table.tableName} already exists!`;
-            console.log(`Table ${table.tableName} already exists!`);
-        }
-        else{
-            createdTablesMessage += `</br>Table ${table.tableName} Created Successfully!`;
-            console.log(`Table ${table.tableName} Created Successfully!`);
+          createdTablesMessage += `</br>Table ${table.tableName} already exists!`;
+          console.log(`Table ${table.tableName} already exists!`);
+        } else {
+          createdTablesMessage += `</br>Table ${table.tableName} created successfully!`;
+          console.log(`Table ${table.tableName} created successfully!`);
         }
       });
     });

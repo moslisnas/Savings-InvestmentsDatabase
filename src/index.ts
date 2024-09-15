@@ -3,9 +3,11 @@ import dotenv from "dotenv";
 import mysql from "mysql2";
 import path from "path";
 import { Connection } from "mysql2/typings/mysql/lib/Connection";
-import { createDatabaseWebservice } from "./web_service/createDatabase";
-import { useDatabaseWebservice } from "./web_service/useDatabase";
-import { createTablesWebservice } from "./web_service/createTables";
+import { createDatabaseWebservice } from "./webservice/createDatabase";
+import { useDatabaseWebservice } from "./webservice/useDatabase";
+import { createTablesWebservice } from "./webservice/createTables";
+import { ExpenseIncomeTypeApi } from "./api/ExpenseIncomeTypeApi";
+import { InvestmentTypeApi } from "./api/InvestmentTypeApi";
 
 //1. Load environment variables
 dotenv.config();
@@ -13,11 +15,6 @@ dotenv.config();
 //2. Create server
 const app: Express = express();
 const port = process.env.PORT || 3000;
-
-app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
@@ -37,16 +34,40 @@ db_con.connect((error: any) => {
   }
 });
 
-//4. Webservice routes:
-//4.1 Create the database
-//4.2 Use the database
-//4.3 Create the tables
-app.get("/createDatabase", (req, res) => {
+//4. Home route:
+app.get("/", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+//5. API routes:
+//5.1 API route
+app.get('/api', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "api/index.html"));
+});
+//5.2 Get data
+app.get('/api/expense_income_type', (req, res) => {
+  let expenseIncomeTypeApi = new ExpenseIncomeTypeApi();
+  expenseIncomeTypeApi.getExpenseIncomeTypes(db_con, req, res);
+});
+app.get('/api/investment_type', (req, res) => {
+  let investmentTypeApi = new InvestmentTypeApi();
+  investmentTypeApi.getInvestmentTypes(db_con, req, res);
+});
+
+//6. Webservice routes:
+//6.1 Webservice route
+app.get('/webservice', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "webservice/index.html"));
+});
+//6.2 Create the database
+app.get("/webservice/createDatabase", (req, res) => {
   createDatabaseWebservice(db_con, req, res);
 });
-app.get(`/useDatabase`, (req, res) => {
+//6.3 Use the database
+app.get(`/webservice/useDatabase`, (req, res) => {
   useDatabaseWebservice(db_con, req, res);
 });
-app.get("/createTables", (req, res) => {
+//6.4 Create the tables
+app.get("/webservice/createTables", (req, res) => {
   createTablesWebservice(db_con, req, res);
 });

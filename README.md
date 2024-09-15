@@ -4,6 +4,26 @@ This project uses express and mysql node.js dependencies to provide de functiona
 
 To use it correctly you must create your own .env file at root folder and indicate the port, where you want to serve the web service, and the databasename and credentials (you can base on the .env-example file).
 
+## API
+<table>
+    <tr>
+        <th>URL pattern</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>/api</td>
+        <td>This table help</td>
+    </tr>
+    <tr>
+        <td>/api/expense_income_type</td>
+        <td>Get all the expense_income_type elements</td>
+    </tr>
+    <tr>
+        <td>/api/investment_type</td>
+        <td>Get all the investment_type elements</td>
+    </tr>
+</table>
+
 ## Web service
 <table>
     <tr>
@@ -11,16 +31,20 @@ To use it correctly you must create your own .env file at root folder and indica
         <th>Description</th>
     </tr>
     <tr>
-        <td>/createDatabase</td>
+        <td>/webservice</td>
+        <td>This table help</td>
+    </tr>
+    <tr>
+        <td>/webservice/createDatabase</td>
         <td>Create an schema with DATABASE_NAME indicated at .env file</td>
     </tr>
     <tr>
-        <td>/useDatabase</td>
+        <td>/webservice/useDatabase</td>
         <td>Use DATABASE_NAME indicated at .env file to check if is created</td>
     </tr>
     <tr>
-        <td>/createTables</td>
-        <td>Created all necessary tables</td>
+        <td>/webservice/createTables</td>
+        <td>Create all necessary tables</td>
     </tr>
 </table>
 
