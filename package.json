@@ -1,0 +1,31 @@
+{
+  "name": "savings-investmentsdatabase",
+  "version": "1.0.0",
+  "description": "Project to store data for Savings & Investments application.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moslisnas/Savings-InvestmentsDatabase.git"
+  },
+  "author": "Alejandro Molina",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mysql2": "^3.11.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.5",
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
