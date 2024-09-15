@@ -14,6 +14,14 @@ To use it correctly you must create your own .env file at root folder and indica
         <td>/createDatabase</td>
         <td>Create an schema with DATABASE_NAME indicated at .env file</td>
     </tr>
+    <tr>
+        <td>/useDatabase</td>
+        <td>Use DATABASE_NAME indicated at .env file to check if is created</td>
+    </tr>
+    <tr>
+        <td>/createTables</td>
+        <td>Created all necessary tables</td>
+    </tr>
 </table>
 
 ## Versions used
