@@ -14,7 +14,20 @@ dotenv.config();
 
 //2. Create server
 const app: Express = express();
+const cors = require("cors");
 const port = process.env.PORT || 3000;
+
+//TO DO --> Do this action only for development
+//Open to all
+app.use(cors());
+//Not development environments
+/*app.use(
+  cors({
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);*/
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
@@ -41,33 +54,33 @@ app.get("/", (req: Request, res: Response) => {
 
 //5. API routes:
 //5.1 API route
-app.get('/api', (req: Request, res: Response) => {
+app.get("/api", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "api/index.html"));
 });
 //5.2 Get data
-app.get('/api/expense_income_type', (req, res) => {
+app.get("/api/expense_income_type", (req: Request, res: Response) => {
   let expenseIncomeTypeApi = new ExpenseIncomeTypeApi();
   expenseIncomeTypeApi.getExpenseIncomeTypes(db_con, req, res);
 });
-app.get('/api/investment_type', (req, res) => {
+app.get("/api/investment_type", (req: Request, res: Response) => {
   let investmentTypeApi = new InvestmentTypeApi();
   investmentTypeApi.getInvestmentTypes(db_con, req, res);
 });
 
 //6. Webservice routes:
 //6.1 Webservice route
-app.get('/webservice', (req: Request, res: Response) => {
+app.get("/webservice", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "webservice/index.html"));
 });
 //6.2 Create the database
-app.get("/webservice/createDatabase", (req, res) => {
+app.get("/webservice/createDatabase", (req: Request, res: Response) => {
   createDatabaseWebservice(db_con, req, res);
 });
 //6.3 Use the database
-app.get(`/webservice/useDatabase`, (req, res) => {
+app.get(`/webservice/useDatabase`, (req: Request, res: Response) => {
   useDatabaseWebservice(db_con, req, res);
 });
 //6.4 Create the tables
-app.get("/webservice/createTables", (req, res) => {
+app.get("/webservice/createTables", (req: Request, res: Response) => {
   createTablesWebservice(db_con, req, res);
 });
