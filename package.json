@@ -1,6 +1,6 @@
 {
   "name": "savings-investmentsdatabase",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Project to store data for Savings & Investments application.",
   "main": "dist/index.js",
   "scripts": {

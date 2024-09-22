@@ -11,6 +11,7 @@ export class InvestmentTypeApi extends GenericApi {
       if (err) {
         throw err;
       }
+      console.log(query);
       res.json(results);
     });
   }

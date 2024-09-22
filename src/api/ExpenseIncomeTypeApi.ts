@@ -15,6 +15,7 @@ export class ExpenseIncomeTypeApi extends GenericApi {
       if (err) {
         throw err;
       }
+      console.log(query);
       res.json(results);
     });
   }
