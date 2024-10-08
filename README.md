@@ -1,4 +1,7 @@
 # Savings & Investments Database
+## Run project
+Use <code>npm run dev</code> and you can use the Webservice routes and the API routes.
+
 ## Configuration
 This project uses express and mysql node.js dependencies to provide de functionality of interaction with database.
 

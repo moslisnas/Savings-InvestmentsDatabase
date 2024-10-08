@@ -8,6 +8,7 @@ import { useDatabaseWebservice } from "./webservice/useDatabase";
 import { createTablesWebservice } from "./webservice/createTables";
 import { ExpenseIncomeTypeApi } from "./api/ExpenseIncomeTypeApi";
 import { InvestmentTypeApi } from "./api/InvestmentTypeApi";
+import { TemplateApi } from "./api/TemplateApi";
 
 //1. Load environment variables
 dotenv.config();
@@ -65,6 +66,10 @@ app.get("/api/expense_income_type", (req: Request, res: Response) => {
 app.get("/api/investment_type", (req: Request, res: Response) => {
   let investmentTypeApi = new InvestmentTypeApi();
   investmentTypeApi.getInvestmentTypes(db_con, req, res);
+});
+app.get("/api/template", (req: Request, res: Response) => {
+  let templateApi = new TemplateApi();
+  templateApi.getTemplates(db_con, req, res);
 });
 
 //6. Webservice routes:
