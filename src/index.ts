@@ -9,6 +9,8 @@ import { createTablesWebservice } from "./webservice/createTables";
 import { ExpenseIncomeTypeApi } from "./api/ExpenseIncomeTypeApi";
 import { InvestmentTypeApi } from "./api/InvestmentTypeApi";
 import { TemplateApi } from "./api/TemplateApi";
+import { TemplateIncomeApi } from "./api/TemplateIncomeApi";
+import { IncomeTypeApi } from "./api/IncomeTypeApi";
 
 //1. Load environment variables
 dotenv.config();
@@ -60,17 +62,33 @@ app.get("/api", (req: Request, res: Response) => {
 });
 //5.2 Get data
 app.get("/api/expense_income_type", (req: Request, res: Response) => {
-  let expenseIncomeTypeApi = new ExpenseIncomeTypeApi();
+  let expenseIncomeTypeApi:ExpenseIncomeTypeApi = new ExpenseIncomeTypeApi();
   expenseIncomeTypeApi.getExpenseIncomeTypes(db_con, req, res);
 });
 app.get("/api/investment_type", (req: Request, res: Response) => {
-  let investmentTypeApi = new InvestmentTypeApi();
+  let investmentTypeApi:InvestmentTypeApi = new InvestmentTypeApi();
   investmentTypeApi.getInvestmentTypes(db_con, req, res);
 });
 app.get("/api/template", (req: Request, res: Response) => {
-  let templateApi = new TemplateApi();
+  let templateApi:TemplateApi = new TemplateApi();
   templateApi.getTemplates(db_con, req, res);
 });
+app.get("/api/template_income", (req: Request, res: Response) => {
+  let templateIncomeApi:TemplateIncomeApi = new TemplateIncomeApi();
+  let idTemplate:string|null = (req.query.id_template) ? (typeof(req.query.id_template)=="string" ? req.query.id_template : null) : null;
+  if(idTemplate){
+    templateIncomeApi.getTemplateIncomesByIdTemplate(db_con, idTemplate, req, res);
+  }
+  else{
+    templateIncomeApi.getTemplateIncomes(db_con, req, res);
+  }
+});
+app.get("/api/income_type", (req: Request, res: Response) => {
+  let incomeTypeApi = new IncomeTypeApi();
+  incomeTypeApi.getIncomeTypes(db_con, req, res);
+});
+//5.3 Add data
+
 
 //6. Webservice routes:
 //6.1 Webservice route

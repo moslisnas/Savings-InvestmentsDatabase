@@ -1,13 +1,17 @@
 # Savings & Investments Database
+
 ## Run project
+
 Use <code>npm run dev</code> and you can use the Webservice routes and the API routes.
 
 ## Configuration
+
 This project uses express and mysql node.js dependencies to provide de functionality of interaction with database.
 
 To use it correctly you must create your own .env file at root folder and indicate the port, where you want to serve the web service, and the databasename and credentials (you can base on the .env-example file).
 
 ## API
+
 <table>
     <tr>
         <th>URL pattern</th>
@@ -25,9 +29,26 @@ To use it correctly you must create your own .env file at root folder and indica
         <td>/api/investment_type</td>
         <td>Get all the investment_type elements</td>
     </tr>
+    <tr>
+        <td>/api/template</td>
+        <td>Get all the template elements</td>
+    </tr>
+    <tr>
+        <td>/api/template_income</td>
+        <td>Get all the template_income elements</td>
+    </tr>
+      <tr>
+        <td>/api/template_income?id_template=?</td>
+        <td>Get all the template_income elements of one specific template</td>
+      </tr>
+    <tr>
+        <td>/api/income_type</td>
+        <td>Get all the income_type elements</td>
+    </tr>
 </table>
 
 ## Web service
+
 <table>
     <tr>
         <th>URL pattern</th>
@@ -52,7 +73,9 @@ To use it correctly you must create your own .env file at root folder and indica
 </table>
 
 ## Versions used
+
 ### Production dependencies
+
 <table>
     <tr>
         <th>Node package</th>
