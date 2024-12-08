@@ -92,6 +92,7 @@ app.get("/api/template_income", (req: Request, res: Response) => {
       : null
     : null;
   if (idTemplate) {
+    console.log("Entra por idTemplate: " + idTemplate);
     templateIncomeApi.getTemplateIncomesByIdTemplate(
       db_con,
       idTemplate,
@@ -99,12 +100,23 @@ app.get("/api/template_income", (req: Request, res: Response) => {
       res
     );
   } else {
+    console.log("NO entra por idTemplate: " + idTemplate);
     templateIncomeApi.getTemplateIncomes(db_con, req, res);
   }
 });
 app.get("/api/income_type", (req: Request, res: Response) => {
   let incomeTypeApi = new IncomeTypeApi();
-  incomeTypeApi.getIncomeTypes(db_con, req, res);
+  let id: string | null = req.query.id
+    ? typeof req.query.id == "string"
+      ? req.query.id
+      : null
+    : null;
+    
+  if (id) {
+    incomeTypeApi.getIncomeTypeById(db_con, id, req, res);
+  } else {
+    incomeTypeApi.getIncomeTypes(db_con, req, res);
+  }
 });
 app.get("/api/template_expense", (req: Request, res: Response) => {
   let templateExpenseApi: TemplateExpenseApi = new TemplateExpenseApi();
@@ -114,6 +126,7 @@ app.get("/api/template_expense", (req: Request, res: Response) => {
       : null
     : null;
   if (idTemplate) {
+    console.log("Entra por idTemplate: " + idTemplate);
     templateExpenseApi.getTemplateExpensesByIdTemplate(
       db_con,
       idTemplate,
@@ -121,12 +134,23 @@ app.get("/api/template_expense", (req: Request, res: Response) => {
       res
     );
   } else {
+    console.log("NO entra por idTemplate: " + idTemplate);
     templateExpenseApi.getTemplateExpenses(db_con, req, res);
   }
 });
 app.get("/api/expense_type", (req: Request, res: Response) => {
   let expenseTypeApi = new ExpenseTypeApi();
-  expenseTypeApi.getExpenseTypes(db_con, req, res);
+  let id: string | null = req.query.id
+    ? typeof req.query.id == "string"
+      ? req.query.id
+      : null
+    : null;
+    
+  if (id) {
+    expenseTypeApi.getExpenseTypeById(db_con, id, req, res);
+  } else {
+    expenseTypeApi.getExpenseTypes(db_con, req, res);
+  }
 });
 //5.3 Add data
 

@@ -50,6 +50,10 @@ To use it correctly you must create your own .env file at root folder and indica
         <td>Get all the income_type elements</td>
     </tr>
     <tr>
+        <td>/api/income_type?id="id"</td>
+        <td>Get the income_type element with the id</td>
+    </tr>
+    <tr>
         <td>/api/template_expense</td>
         <td>Get all the template_expense elements</td>
     </tr>
@@ -60,6 +64,10 @@ To use it correctly you must create your own .env file at root folder and indica
     <tr>
         <td>/api/expense_type</td>
         <td>Get all the expense_type elements</td>
+    </tr>
+    <tr>
+        <td>/api/expense_type?id="id"</td>
+        <td>Get the expense_type element with the id</td>
     </tr>
 </table>
 

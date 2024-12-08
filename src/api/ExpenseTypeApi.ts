@@ -15,4 +15,21 @@ export class ExpenseTypeApi extends GenericApi {
       res.json(results);
     });
   }
+  public getExpenseTypeById(
+    db_con: Connection,
+    id: string,
+    req: Request,
+    res: Response
+  ) {
+    this.useDatabase(db_con, req);
+
+    const query = "SELECT * FROM expense_type WHERE id=?";
+    db_con.query(query, id, (err, results) => {
+      if (err) {
+        throw err;
+      }
+      console.log(query);
+      res.json(results);
+    });
+  }
 }
