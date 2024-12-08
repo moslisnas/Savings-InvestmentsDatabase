@@ -15,7 +15,12 @@ export class TemplateIncomeApi extends GenericApi {
       res.json(results);
     });
   }
-  public getTemplateIncomesByIdTemplate(db_con: Connection, idTemplate:string, req: Request, res: Response){
+  public getTemplateIncomesByIdTemplate(
+    db_con: Connection,
+    idTemplate: string,
+    req: Request,
+    res: Response
+  ) {
     this.useDatabase(db_con, req);
 
     const query = "SELECT * FROM template_income WHERE id_template=?";

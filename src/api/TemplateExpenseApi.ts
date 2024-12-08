@@ -2,11 +2,11 @@ import { Connection } from "mysql2/typings/mysql/lib/Connection";
 import { GenericApi } from "./GenericApi";
 import { Request, Response } from "express";
 
-export class TemplateApi extends GenericApi {
-  public getTemplates(db_con: Connection, req: Request, res: Response) {
+export class TemplateExpenseApi extends GenericApi {
+  public getTemplateExpenses(db_con: Connection, req: Request, res: Response) {
     this.useDatabase(db_con, req);
 
-    const query = "SELECT * FROM template";
+    const query = "SELECT * FROM template_expense";
     db_con.query(query, (err, results) => {
       if (err) {
         throw err;
@@ -15,16 +15,16 @@ export class TemplateApi extends GenericApi {
       res.json(results);
     });
   }
-  public getTemplateById(
+  public getTemplateExpensesByIdTemplate(
     db_con: Connection,
-    id: string,
+    idTemplate: string,
     req: Request,
     res: Response
   ) {
     this.useDatabase(db_con, req);
 
-    const query = "SELECT * FROM template WHERE id=?";
-    db_con.query(query, id, (err, results) => {
+    const query = "SELECT * FROM template_expense WHERE id_template=?";
+    db_con.query(query, idTemplate, (err, results) => {
       if (err) {
         throw err;
       }
