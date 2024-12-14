@@ -13,10 +13,10 @@ export class ExpenseIncomeTypeApi extends GenericApi {
     const query = "SELECT * FROM expense_income_type";
     db_con.query(query, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
 }

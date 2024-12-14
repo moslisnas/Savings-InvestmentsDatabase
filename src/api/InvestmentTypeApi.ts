@@ -9,10 +9,10 @@ export class InvestmentTypeApi extends GenericApi {
     const query = "SELECT * FROM investment_type";
     db_con.query(query, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
 }

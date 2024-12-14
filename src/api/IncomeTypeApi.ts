@@ -9,10 +9,10 @@ export class IncomeTypeApi extends GenericApi {
     const query = "SELECT * FROM income_type";
     db_con.query(query, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
   public getIncomeTypeById(
@@ -26,10 +26,10 @@ export class IncomeTypeApi extends GenericApi {
     const query = "SELECT * FROM income_type WHERE id=?";
     db_con.query(query, id, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
 }

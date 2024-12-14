@@ -9,10 +9,10 @@ export class TemplateExpenseApi extends GenericApi {
     const query = "SELECT * FROM template_expense";
     db_con.query(query, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
   public getTemplateExpensesByIdTemplate(
@@ -26,10 +26,10 @@ export class TemplateExpenseApi extends GenericApi {
     const query = "SELECT * FROM template_expense WHERE id_template=?";
     db_con.query(query, idTemplate, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
 }

@@ -9,10 +9,10 @@ export class TemplateIncomeApi extends GenericApi {
     const query = "SELECT * FROM template_income";
     db_con.query(query, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
   public getTemplateIncomesByIdTemplate(
@@ -23,13 +23,13 @@ export class TemplateIncomeApi extends GenericApi {
   ) {
     this.useDatabase(db_con, req);
 
-    const query = "SELECT * FROM template_income WHERE id_template=?";
+    const query = "SELECT * FROM template_income WHERE id_templatee=?";
     db_con.query(query, idTemplate, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
 }

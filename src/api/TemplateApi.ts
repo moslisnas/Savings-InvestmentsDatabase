@@ -9,10 +9,10 @@ export class TemplateApi extends GenericApi {
     const query = "SELECT * FROM template";
     db_con.query(query, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
   public getTemplateById(
@@ -26,10 +26,10 @@ export class TemplateApi extends GenericApi {
     const query = "SELECT * FROM template WHERE id=?";
     db_con.query(query, id, (err, results) => {
       if (err) {
-        throw err;
+        return res.status(500).json(err);
       }
       console.log(query);
-      res.json(results);
+      res.status(200).json(results);
     });
   }
 }

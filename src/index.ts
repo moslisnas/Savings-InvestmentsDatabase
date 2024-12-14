@@ -1,28 +1,19 @@
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
-import mysql from "mysql2";
 import path from "path";
 import { Connection } from "mysql2/typings/mysql/lib/Connection";
-import { createDatabaseWebservice } from "./webservice/createDatabase";
-import { useDatabaseWebservice } from "./webservice/useDatabase";
-import { createTablesWebservice } from "./webservice/createTables";
-import { ExpenseIncomeTypeApi } from "./api/ExpenseIncomeTypeApi";
-import { InvestmentTypeApi } from "./api/InvestmentTypeApi";
-import { TemplateApi } from "./api/TemplateApi";
-import { TemplateIncomeApi } from "./api/TemplateIncomeApi";
-import { IncomeTypeApi } from "./api/IncomeTypeApi";
-import { TemplateExpenseApi } from "./api/TemplateExpenseApi";
-import { ExpenseTypeApi } from "./api/ExpenseTypeApi";
+import { connection } from "./database/connection";
+import { createApiRoutes } from "./routes/apiRoute";
+import { createWebserviceRoutes } from "./routes/webserviceRoute";
 
 //1. Load environment variables
-dotenv.config();
+process.loadEnvFile();
 
 //2. Create server
-const app: Express = express();
+const app: Express = express();//TODO module.exports = app;
 const cors = require("cors");
 const port = process.env.PORT || 3000;
 
-//TO DO --> Do this action only for development
+//TODO --> Do this action only for development
 //Open to all
 app.use(cors());
 //Not development environments
@@ -38,19 +29,7 @@ app.listen(port, () => {
 });
 
 //3. Create MySQL connection object
-let db_con: Connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-});
-db_con.connect((error: any) => {
-  if (error) {
-    console.log("Database Connection Failed !!!", error);
-  } else {
-    console.log("connected to Database");
-  }
-});
+let db_con: Connection = connection;
 
 //4. Home route:
 app.get("/", (req: Request, res: Response) => {
@@ -58,116 +37,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 //5. API routes:
-//5.1 API route
-app.get("/api", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "api/index.html"));
-});
-//5.2 Get data
-app.get("/api/expense_income_type", (req: Request, res: Response) => {
-  let expenseIncomeTypeApi: ExpenseIncomeTypeApi = new ExpenseIncomeTypeApi();
-  expenseIncomeTypeApi.getExpenseIncomeTypes(db_con, req, res);
-});
-app.get("/api/investment_type", (req: Request, res: Response) => {
-  let investmentTypeApi: InvestmentTypeApi = new InvestmentTypeApi();
-  investmentTypeApi.getInvestmentTypes(db_con, req, res);
-});
-app.get("/api/template", (req: Request, res: Response) => {
-  let templateApi: TemplateApi = new TemplateApi();
-  let id: string | null = req.query.id
-    ? typeof req.query.id == "string"
-      ? req.query.id
-      : null
-    : null;
-  if (id) {
-    templateApi.getTemplateById(db_con, id, req, res);
-  } else {
-    templateApi.getTemplates(db_con, req, res);
-  }
-});
-app.get("/api/template_income", (req: Request, res: Response) => {
-  let templateIncomeApi: TemplateIncomeApi = new TemplateIncomeApi();
-  let idTemplate: string | null = req.query.id_template
-    ? typeof req.query.id_template == "string"
-      ? req.query.id_template
-      : null
-    : null;
-  if (idTemplate) {
-    console.log("Entra por idTemplate: " + idTemplate);
-    templateIncomeApi.getTemplateIncomesByIdTemplate(
-      db_con,
-      idTemplate,
-      req,
-      res
-    );
-  } else {
-    console.log("NO entra por idTemplate: " + idTemplate);
-    templateIncomeApi.getTemplateIncomes(db_con, req, res);
-  }
-});
-app.get("/api/income_type", (req: Request, res: Response) => {
-  let incomeTypeApi = new IncomeTypeApi();
-  let id: string | null = req.query.id
-    ? typeof req.query.id == "string"
-      ? req.query.id
-      : null
-    : null;
-    
-  if (id) {
-    incomeTypeApi.getIncomeTypeById(db_con, id, req, res);
-  } else {
-    incomeTypeApi.getIncomeTypes(db_con, req, res);
-  }
-});
-app.get("/api/template_expense", (req: Request, res: Response) => {
-  let templateExpenseApi: TemplateExpenseApi = new TemplateExpenseApi();
-  let idTemplate: string | null = req.query.id_template
-    ? typeof req.query.id_template == "string"
-      ? req.query.id_template
-      : null
-    : null;
-  if (idTemplate) {
-    console.log("Entra por idTemplate: " + idTemplate);
-    templateExpenseApi.getTemplateExpensesByIdTemplate(
-      db_con,
-      idTemplate,
-      req,
-      res
-    );
-  } else {
-    console.log("NO entra por idTemplate: " + idTemplate);
-    templateExpenseApi.getTemplateExpenses(db_con, req, res);
-  }
-});
-app.get("/api/expense_type", (req: Request, res: Response) => {
-  let expenseTypeApi = new ExpenseTypeApi();
-  let id: string | null = req.query.id
-    ? typeof req.query.id == "string"
-      ? req.query.id
-      : null
-    : null;
-    
-  if (id) {
-    expenseTypeApi.getExpenseTypeById(db_con, id, req, res);
-  } else {
-    expenseTypeApi.getExpenseTypes(db_con, req, res);
-  }
-});
-//5.3 Add data
+createApiRoutes(db_con, app);
 
 //6. Webservice routes:
-//6.1 Webservice route
-app.get("/webservice", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "webservice/index.html"));
-});
-//6.2 Create the database
-app.get("/webservice/createDatabase", (req: Request, res: Response) => {
-  createDatabaseWebservice(db_con, req, res);
-});
-//6.3 Use the database
-app.get(`/webservice/useDatabase`, (req: Request, res: Response) => {
-  useDatabaseWebservice(db_con, req, res);
-});
-//6.4 Create the tables
-app.get("/webservice/createTables", (req: Request, res: Response) => {
-  createTablesWebservice(db_con, req, res);
-});
+createWebserviceRoutes(db_con, app);
