@@ -1,15 +1,18 @@
 import mysql from "mysql2";
 import { Connection } from "mysql2/typings/mysql/lib/Connection";
+import {
+  DATABASE_HOST,
+  DATABASE_PASSWORD,
+  DATABASE_PORT,
+  DATABASE_USERNAME,
+} from "../env.config";
 
-//1. Load environment variables
-process.loadEnvFile();
-
-//2. Create connection to database
-export let connection: Connection = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  port: Number(process.env.DATABASE_PORT),
-  user: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
+// Create connection to database
+export const connection: Connection = mysql.createConnection({
+  host: DATABASE_HOST,
+  port: Number(DATABASE_PORT),
+  user: DATABASE_USERNAME,
+  password: DATABASE_PASSWORD,
 });
 connection.connect((error: any) => {
   if (error) {

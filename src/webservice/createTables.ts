@@ -1,12 +1,13 @@
 import { Connection } from "mysql2/typings/mysql/lib/Connection";
+import { DATABASE_NAME } from "../env.config";
 
 export function createTablesWebservice(db_con: Connection, req: any, res: any) {
-  let useQuery = `USE ${process.env.DATABASE_NAME}`;
+  let useQuery = `USE ${DATABASE_NAME}`;
   db_con.query(useQuery, (error: any) => {
     if (error) {
       throw error;
     }
-    console.log(`Using Database ${process.env.DATABASE_NAME}`);
+    console.log(`Using Database ${DATABASE_NAME}`);
 
     const tables = [
       {
@@ -40,7 +41,7 @@ export function createTablesWebservice(db_con: Connection, req: any, res: any) {
     });
 
     return res.send(
-      `Created tables at ${process.env.DATABASE_NAME} Database:` +
+      `Created tables at ${DATABASE_NAME} Database:` +
         createdTablesMessage
     );
   });

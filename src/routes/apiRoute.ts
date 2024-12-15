@@ -10,11 +10,11 @@ import { TemplateExpenseApi } from "../api/TemplateExpenseApi";
 import { ExpenseTypeApi } from "../api/ExpenseTypeApi";
 
 export const createApiRoutes = (db_con: Connection, app: Express) => {
-  //5.1 API route
+  //1. API route
   app.get("/api", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../api/index.html"));
   });
-  //5.2 Get data
+  //2. Get data
   app.get("/api/expense_income_type", (req: Request, res: Response) => {
     let expenseIncomeTypeApi: ExpenseIncomeTypeApi = new ExpenseIncomeTypeApi();
     expenseIncomeTypeApi.getExpenseIncomeTypes(db_con, req, res);
@@ -104,6 +104,6 @@ export const createApiRoutes = (db_con: Connection, app: Express) => {
       expenseTypeApi.getExpenseTypes(db_con, req, res);
     }
   });
-  //5.3 Add data
+  //3. Add data
   //TODO
 };

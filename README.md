@@ -12,89 +12,11 @@ To use it correctly you must create your own .env file at root folder and indica
 
 ## API
 
-<table>
-    <tr>
-        <th>URL pattern</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>/api</td>
-        <td>This table help</td>
-    </tr>
-    <tr>
-        <td>/api/expense_income_type</td>
-        <td>Get all the expense_income_type elements</td>
-    </tr>
-    <tr>
-        <td>/api/investment_type</td>
-        <td>Get all the investment_type elements</td>
-    </tr>
-    <tr>
-        <td>/api/template</td>
-        <td>Get all the template elements</td>
-    </tr>
-    <tr>
-        <td>/api/template?id="id"</td>
-        <td>Get the template element with the id</td>
-    </tr>
-    <tr>
-        <td>/api/template_income</td>
-        <td>Get all the template_income elements</td>
-    </tr>
-    <tr>
-        <td>/api/template_income?id_template="id"</td>
-        <td>Get all the template_income elements of one specific template</td>
-    </tr>
-    <tr>
-        <td>/api/income_type</td>
-        <td>Get all the income_type elements</td>
-    </tr>
-    <tr>
-        <td>/api/income_type?id="id"</td>
-        <td>Get the income_type element with the id</td>
-    </tr>
-    <tr>
-        <td>/api/template_expense</td>
-        <td>Get all the template_expense elements</td>
-    </tr>
-    <tr>
-        <td>/api/template_expense?id_template="id"</td>
-        <td>Get all the template_expense elements of one specific template</td>
-    </tr>
-    <tr>
-        <td>/api/expense_type</td>
-        <td>Get all the expense_type elements</td>
-    </tr>
-    <tr>
-        <td>/api/expense_type?id="id"</td>
-        <td>Get the expense_type element with the id</td>
-    </tr>
-</table>
+[API Endpoints](src/api/README.md)
 
 ## Web service
 
-<table>
-    <tr>
-        <th>URL pattern</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>/webservice</td>
-        <td>This table help</td>
-    </tr>
-    <tr>
-        <td>/webservice/createDatabase</td>
-        <td>Create an schema with DATABASE_NAME indicated at .env file</td>
-    </tr>
-    <tr>
-        <td>/webservice/useDatabase</td>
-        <td>Use DATABASE_NAME indicated at .env file to check if is created</td>
-    </tr>
-    <tr>
-        <td>/webservice/createTables</td>
-        <td>Create all necessary tables</td>
-    </tr>
-</table>
+[Webservice Endpoints](src/webservice/README.md)
 
 ## Versions used
 
@@ -107,6 +29,11 @@ To use it correctly you must create your own .env file at root folder and indica
         <th>Date of last revision (dd-mm-yyy)</th>
     </tr>
     <tr>
+        <td>copyfiles</td>
+        <td>2.4.1</td>
+        <td>14-12-2024</th>
+    </tr>
+    <tr>
         <td>express</td>
         <td>4.21.0</td>
         <td>15-09-2024</th>
@@ -117,8 +44,8 @@ To use it correctly you must create your own .env file at root folder and indica
         <td>15-09-2024</th>
     </tr>
     <tr>
-        <td>dotenv</td>
-        <td>16.4.5</td>
-        <td>15-09-2024</th>
+        <td>zod</td>
+        <td>3.24.1</td>
+        <td>16-12-2024</th>
     </tr>
 </table>
